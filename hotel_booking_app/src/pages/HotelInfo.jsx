@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { getHotelBySlug } from '../api/request';
 import { NavBar } from '../components/Navbar';
 import { LoadingSkeleton } from '../components/LoadingSkeleton';
-import { Typography } from '@mui/material';
+import { Box, Button, Container,ListItem, Typography } from '@mui/material';
 import { Gallery } from '../components/Gallery';
 
 function HotelInfo() {
@@ -28,7 +28,31 @@ function HotelInfo() {
                             variant="h6"
                             fontWeight={'bold'}
                             sx={{ marginBottom: '3px 0' }}>{data?.name}</Typography>
-                        <Gallery images={data?.images } />
+                        <Gallery images={data?.images} />
+                        
+                        <Box sx={{ margin: '3px 0' display: 'flex' fontWeight: 'bold' }}>
+                            {data?.rooms.map((room) => (
+                                <Typography variant="h6" fontWeight='bold'key={room.id} sx={{ margin: '3px 5px 5px 0' color: 'gray' }}>
+                                    {room.content}
+                                    </Typography>
+                            ))}
+                        </Box>
+                        <Typography
+                            variant='p'
+                            fontWeight={'bold'}
+                            sx={{ margin: '10px 0' }}>{data?.aboutThePlace}</Typography>
+                        <Typography
+                            variant='h4'
+                            fontWeight={'bold'}
+                            sx={{ margin: '3rem 0 1.5rem' }}>
+                            What this place offers!!!</Typography>
+                        <Box sx={{ margin: '3px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <Box sx={{maxWidth:'70%'}}>{data?.features.map((features) => (
+                                <ListItem key={feature.id}>{feature.text}</ListItem>
+                            ))}
+                            </Box>
+                             <Button variant="outlined">Reserve</Button>
+                        </Box>
                     </Container>
             )}
         </>
